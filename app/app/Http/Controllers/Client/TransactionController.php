@@ -42,7 +42,7 @@ class TransactionController extends Controller
             'file',
             file_get_contents($file->getRealPath()),
             $file->getClientOriginalName()
-        )->post('http://localhost:8383/pellet-excel');
+        )->post('http://10.12.0.102:5000/pellet-excel');
 
         $data= $response->json();
 
