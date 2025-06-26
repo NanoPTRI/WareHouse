@@ -70,11 +70,12 @@ RUN sed 's_@php artisan package:discover_/bin/true_;' -i composer.json \
     && mkdir -p storage/framework/sessions storage/framework/views storage/framework/cache
 
 COPY ./scripts/php-fpm-entrypoint /usr/local/bin/php-entrypoint
+RUN docker-php-ext-install opcache
 
 RUN chmod a+x /usr/local/bin/*
 # Hapus config default yang masih pakai port 9000
 RUN rm -f /usr/local/etc/php-fpm.d/www.conf.default /usr/local/etc/php-fpm.d/zz-docker.conf
-ENTRYPOINT ["/usr/local/bin/php-entrypoint"]
+#ENTRYPOINT ["/usr/local/bin/php-entrypoint"]
 EXPOSE 9001
 
 COPY ./php/www.conf /usr/local/etc/php-fpm.d/www.conf
